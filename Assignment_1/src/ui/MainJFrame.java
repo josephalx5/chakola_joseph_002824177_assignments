@@ -48,6 +48,7 @@ public class MainJFrame extends javax.swing.JFrame {
         vlaBtn = new javax.swing.JButton();
         cbaBtn = new javax.swing.JButton();
         vbaBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,6 +109,10 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Person Profile");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -124,6 +129,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(cbaBtn)
                     .addComponent(vbaBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbaBtn, chaBtn, claBtn, cpBtn, vbaBtn, vhaBtn, vlaBtn, vpBtn});
@@ -131,7 +139,9 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(71, 71, 71)
                 .addComponent(cpBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vpBtn)
@@ -147,7 +157,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(cbaBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vbaBtn)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(jPanel2);
@@ -269,6 +279,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton chaBtn;
     private javax.swing.JButton claBtn;
     private javax.swing.JButton cpBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane splitPane;
