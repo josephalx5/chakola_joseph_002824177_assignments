@@ -4,7 +4,10 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.BankAccount;
+import model.BankAccountHistory;
 
 /**
  *
@@ -15,10 +18,10 @@ public class ViewBankAccount extends javax.swing.JPanel {
     /**
      * Creates new form ViewBankAccount
      */
-    private final BankAccount bankAccount;
-    public ViewBankAccount(BankAccount bankAccount) {
+    private final BankAccountHistory bankAccountHistory;
+    public ViewBankAccount(BankAccountHistory bankAccountHistory) {
         initComponents();
-        this.bankAccount = bankAccount;
+        this.bankAccountHistory = bankAccountHistory;
         populate();
     }
 
@@ -42,6 +45,10 @@ public class ViewBankAccount extends javax.swing.JPanel {
         caLabel = new javax.swing.JLabel();
         phLabel = new javax.swing.JLabel();
         caField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        vbaTable = new javax.swing.JTable();
+        ViewButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
 
         daField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,12 +82,54 @@ public class ViewBankAccount extends javax.swing.JPanel {
             }
         });
 
+        vbaTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Debit Amount", "Credit Amount", "Account Type", "Phone Number"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(vbaTable);
+
+        ViewButton.setText("View");
+        ViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteButton.setText("delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(156, 156, 156)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(atLabel)
                     .addComponent(caLabel)
@@ -94,15 +143,30 @@ public class ViewBankAccount extends javax.swing.JPanel {
                     .addComponent(daField)
                     .addComponent(caField)
                     .addComponent(phField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
-            .addComponent(mainLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(127, 127, 127))
+            .addComponent(mainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(56, 56, 56)
                 .addComponent(mainLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ViewButton)
+                    .addComponent(DeleteButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -124,7 +188,7 @@ public class ViewBankAccount extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(phLabel)
                         .addComponent(phField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(288, 288, 288))
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,15 +204,55 @@ public class ViewBankAccount extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_caFieldActionPerformed
 
+    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
+        // TODO add your handling code here:
+        int selected = vbaTable.getSelectedRow();
+        if(selected == -1){
+            JOptionPane.showMessageDialog(this, "Please select a row to view.");
+        } else{
+            BankAccount bankAccount = bankAccountHistory.getBankAccount(selected);
+                   fnField.setText(bankAccount.getName());
+                    atField.setText(bankAccount.getAccountType());
+                    caField.setText(bankAccount.getCreditAmount());
+                    daField.setText(bankAccount.getDebitAmount());
+                    phField.setText(bankAccount.getPhoneNumber());
+        }
+    }//GEN-LAST:event_ViewButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int selected = vbaTable.getSelectedRow();
+        if(selected == -1){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        } else{
+           bankAccountHistory.deleteBankAccount(selected);
+            populate();
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
     private void populate(){
-       fnField.setText(bankAccount.getName());
-       atField.setText(bankAccount.getAccountType());
-       caField.setText(bankAccount.getCreditAmount());
-       daField.setText(bankAccount.getDebitAmount());
-       phField.setText(bankAccount.getPhoneNumber());
+        DefaultTableModel dtm = (DefaultTableModel)vbaTable.getModel();
+        dtm.setRowCount(0);
+        for(BankAccount b: bankAccountHistory.getBankAccounts()){
+            Object []obj= new Object[5];
+            obj[0]= b.getName();
+            obj[2] = b.getCreditAmount();
+            obj[1] = b.getDebitAmount();
+            obj[3] = b.getAccountType();
+            obj[4] = b.getPhoneNumber();
+            dtm.addRow(obj);
+        }
+            fnField.setText("");
+            atField.setText("");
+            daField.setText("");
+            caField.setText("");
+            phField.setText("");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton ViewButton;
     private javax.swing.JTextField atField;
     private javax.swing.JLabel atLabel;
     private javax.swing.JTextField caField;
@@ -156,9 +260,11 @@ public class ViewBankAccount extends javax.swing.JPanel {
     private javax.swing.JTextField daField;
     private javax.swing.JLabel daLabel;
     private javax.swing.JTextField fnField;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mainLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField phField;
     private javax.swing.JLabel phLabel;
+    private javax.swing.JTable vbaTable;
     // End of variables declaration//GEN-END:variables
 }

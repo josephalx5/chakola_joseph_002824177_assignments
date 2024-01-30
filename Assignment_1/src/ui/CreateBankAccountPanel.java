@@ -6,6 +6,7 @@ package ui;
 
 import javax.swing.JOptionPane;
 import model.BankAccount;
+import model.BankAccountHistory;
 
 /**
  *
@@ -16,10 +17,10 @@ public class CreateBankAccountPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateBankAccountPanel
      */
-    private final BankAccount bankAccount;
-    public CreateBankAccountPanel(BankAccount bankAccount) {
+    private final BankAccountHistory bankAccountHistory;
+    public CreateBankAccountPanel(BankAccountHistory bankAccountHistory) {
         initComponents();
-        this.bankAccount = bankAccount;
+        this.bankAccountHistory = bankAccountHistory;
     }
 
     /**
@@ -160,6 +161,7 @@ public class CreateBankAccountPanel extends javax.swing.JPanel {
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         // TODO add your handling code here:
+        BankAccount bankAccount = new BankAccount();
         if("".equals(fnField.getText())|| "".equals(atField.getText())){
             JOptionPane.showMessageDialog(this, "Complete the form.");
         } else {
@@ -169,6 +171,7 @@ public class CreateBankAccountPanel extends javax.swing.JPanel {
             bankAccount.setCreditAmount(caField.getText());
             bankAccount.setDebitAmount(daField.getText());
             bankAccount.setPhoneNumber(phField.getText());
+            bankAccountHistory.addBankAccount(bankAccount);
             fnField.setText("");
             atField.setText("");
             daField.setText("");

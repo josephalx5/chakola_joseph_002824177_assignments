@@ -4,7 +4,10 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -15,10 +18,10 @@ public class ViewPersonPanel extends javax.swing.JPanel {
     /**
      * Creates new form viewPersonPanel
      */
-    private final Person person;
-    public ViewPersonPanel(Person person) {
+    private final PersonHistory personHistory;
+    public ViewPersonPanel(PersonHistory personHistory) {
         initComponents();
-        this.person = person;
+        this.personHistory = personHistory;
         populate();
     }
 
@@ -42,6 +45,10 @@ public class ViewPersonPanel extends javax.swing.JPanel {
         phLabel = new javax.swing.JLabel();
         genLabel = new javax.swing.JLabel();
         phField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        personTable = new javax.swing.JTable();
+        ViewButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
 
         agField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,16 +76,66 @@ public class ViewPersonPanel extends javax.swing.JPanel {
 
         genLabel.setText("Gender:");
 
+        personTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "First Name", "Last Name", "Age", "Gender", "Phone Number"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(personTable);
+
+        ViewButton.setText("View");
+        ViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteButton.setText("delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addComponent(mainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(209, 209, 209)
+                                .addComponent(ViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lnLabel)
                             .addComponent(phLabel)
@@ -92,15 +149,20 @@ public class ViewPersonPanel extends javax.swing.JPanel {
                             .addComponent(agField)
                             .addComponent(phField)
                             .addComponent(gnField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)))
-                .addGap(18, 18, 18))
+                        .addGap(155, 155, 155))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(mainLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ViewButton)
+                    .addComponent(DeleteButton))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -121,7 +183,7 @@ public class ViewPersonPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(gnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(genLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(293, 293, 293))
+                .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,25 +195,66 @@ public class ViewPersonPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lnFieldActionPerformed
 
-    private void populate(){
-        
+    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
+        // TODO add your handling code here:
+        int selected = personTable.getSelectedRow();
+        if(selected == -1){
+             JOptionPane.showMessageDialog(this, "Please select a row to view.");
+        } else{
+        Person person = personHistory.getPerson(selected);
         agField.setText(person.getAge());
         phField.setText(person.getPhoneNumber());
         fnField.setText(person.getFirstName());
         lnField.setText(person.getLastName());
         gnField.setText(person.getGender());
+        }
+    }//GEN-LAST:event_ViewButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+          int selected = personTable.getSelectedRow();
+        if(selected == -1){
+             JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        } else{
+            personHistory.deletePerson(selected);
+            populate();
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void populate(){
+        DefaultTableModel dtm = (DefaultTableModel) personTable.getModel();
+        dtm.setRowCount(0);
+        for(Person p: personHistory.getPersons()){
+           Object [] obj = new Object[5];
+           obj[0] = p.getFirstName();
+           obj[1] = p.getLastName();
+           obj[3] = p.getGender();
+           obj[2] = p.getAge();
+           obj[4] = p.getPhoneNumber();
+           dtm.addRow(obj);
+        }
+          fnField.setText("");
+            lnField.setText("");
+            agField.setText("");
+            phField.setText("");
+            gnField.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton ViewButton;
     private javax.swing.JTextField agField;
     private javax.swing.JLabel ageLabel;
     private javax.swing.JTextField fnField;
     private javax.swing.JLabel genLabel;
     private javax.swing.JTextField gnField;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lnField;
     private javax.swing.JLabel lnLabel;
     private javax.swing.JLabel mainLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTable personTable;
     private javax.swing.JTextField phField;
     private javax.swing.JLabel phLabel;
     // End of variables declaration//GEN-END:variables

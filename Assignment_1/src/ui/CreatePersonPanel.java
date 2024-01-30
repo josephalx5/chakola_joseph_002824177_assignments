@@ -4,8 +4,10 @@
  */
 package ui;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Person;
+import model.PersonHistory;
 
 /**
  *
@@ -16,10 +18,10 @@ public class CreatePersonPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreatePersonPanels
      */
-    private Person person;
-    public CreatePersonPanel(Person person) {
+    private final PersonHistory personHistory;
+    public CreatePersonPanel(PersonHistory personHistory) {
         initComponents();
-        this.person = person;
+        this.personHistory = personHistory;
     }
 
     /**
@@ -138,7 +140,7 @@ public class CreatePersonPanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-   
+        Person person = new Person();
         if("".equals(fnField.getText()) && "".equals(lnField.getText())){
           JOptionPane.showMessageDialog(this, "Please complete the form and press save");
         } else if("".equals(phField.getText()) && "".equals(agField.getText())){
@@ -150,7 +152,7 @@ public class CreatePersonPanel extends javax.swing.JPanel {
             person.setGender(gnField.getText());
             person.setPhoneNumber(phField.getText());
             person.setAge(agField.getText());
-            
+            personHistory.addPerson(person);
             JOptionPane.showMessageDialog(this, "Person Saved");
             fnField.setText("");
             lnField.setText("");

@@ -4,9 +4,9 @@
  */
 package ui;
 
-import model.Address;
-import model.BankAccount;
-import model.Person;
+import java.util.ArrayList;
+import model.*;
+
 
 /**
  *
@@ -17,16 +17,16 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private final Person person;
-    private final BankAccount bankAccount;
-    private final Address localAddress;
-    private final Address homeAddress;
+    private final PersonHistory personHistory;
+    private final BankAccountHistory bankAccountHistory;
+    private final AddressHistory localAddressHistory;
+    private final AddressHistory homeAddressHistory;
     public MainJFrame() {
         initComponents();
-        this.person = new Person();
-        this.bankAccount = new BankAccount();
-        this.localAddress = new Address();
-        this.homeAddress = new Address();
+        this.personHistory = new PersonHistory();
+        this.bankAccountHistory = new BankAccountHistory();
+        this.localAddressHistory = new AddressHistory();
+        this.homeAddressHistory = new AddressHistory();
     }
 
     /**
@@ -191,50 +191,50 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void vpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vpBtnActionPerformed
         // TODO add your handling code here:
-        ViewPersonPanel vpp = new ViewPersonPanel(person);
+        ViewPersonPanel vpp = new ViewPersonPanel(personHistory);
         splitPane.setRightComponent(vpp);
     }//GEN-LAST:event_vpBtnActionPerformed
 
     private void chaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chaBtnActionPerformed
         // TODO add your handling code here:
-        CreateHomeAddress cha = new CreateHomeAddress(homeAddress);
+        CreateHomeAddress cha = new CreateHomeAddress(homeAddressHistory);
         splitPane.setRightComponent(cha);
         
     }//GEN-LAST:event_chaBtnActionPerformed
 
     private void cpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpBtnActionPerformed
         // TODO add your handling code here:
-        CreatePersonPanel cpp = new CreatePersonPanel(person);
+        CreatePersonPanel cpp = new CreatePersonPanel(personHistory);
         splitPane.setRightComponent(cpp);
     }//GEN-LAST:event_cpBtnActionPerformed
 
     private void cbaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbaBtnActionPerformed
         // TODO add your handling code here:
-        CreateBankAccountPanel cbap = new CreateBankAccountPanel(bankAccount);
+        CreateBankAccountPanel cbap = new CreateBankAccountPanel(bankAccountHistory);
         splitPane.setRightComponent(cbap);
     }//GEN-LAST:event_cbaBtnActionPerformed
 
     private void vbaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vbaBtnActionPerformed
         // TODO add your handling code here:
-        ViewBankAccount vba = new ViewBankAccount(bankAccount);
+        ViewBankAccount vba = new ViewBankAccount(bankAccountHistory);
         splitPane.setRightComponent(vba);
     }//GEN-LAST:event_vbaBtnActionPerformed
 
     private void claBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claBtnActionPerformed
         // TODO add your handling code here:
-        CreateLocalAddress cla = new CreateLocalAddress(localAddress);
+        CreateLocalAddress cla = new CreateLocalAddress(localAddressHistory);
         splitPane.setRightComponent(cla);
     }//GEN-LAST:event_claBtnActionPerformed
 
     private void vlaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vlaBtnActionPerformed
         // TODO add your handling code here:
-        ViewLocalAddress vla =new ViewLocalAddress(localAddress);
+        ViewLocalAddress vla =new ViewLocalAddress(localAddressHistory);
         splitPane.setRightComponent(vla);
     }//GEN-LAST:event_vlaBtnActionPerformed
 
     private void vhaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vhaBtnActionPerformed
         // TODO add your handling code here:
-        ViewHomeAddress vha = new ViewHomeAddress(homeAddress);
+        ViewHomeAddress vha = new ViewHomeAddress(homeAddressHistory);
         splitPane.setRightComponent(vha);
         
     }//GEN-LAST:event_vhaBtnActionPerformed

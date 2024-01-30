@@ -4,7 +4,10 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Address;
+import model.AddressHistory;
 
 /**
  *
@@ -15,10 +18,10 @@ public class ViewLocalAddress extends javax.swing.JPanel {
     /**
      * Creates new form ViewLocalAddress
      */
-    private final Address address;
-    public ViewLocalAddress(Address address) {
+    private final AddressHistory addressHistory;
+    public ViewLocalAddress(AddressHistory addressHistory) {
         initComponents();
-        this.address= address;
+        this.addressHistory= addressHistory;
         populate();
     }
 
@@ -44,6 +47,10 @@ public class ViewLocalAddress extends javax.swing.JPanel {
         cityField = new javax.swing.JTextField();
         stateField = new javax.swing.JTextField();
         zipField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        vhaTable = new javax.swing.JTable();
+        ViewButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
 
         mainLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         mainLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,40 +98,93 @@ public class ViewLocalAddress extends javax.swing.JPanel {
             }
         });
 
+        vhaTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Address Line 1", "Address Line 2", "City", "State", "Zip Code"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(vhaTable);
+
+        ViewButton.setText("View");
+        ViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteButton.setText("delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(zipCodeLabel)
+                    .addComponent(stateLabel)
+                    .addComponent(cityLabel)
+                    .addComponent(al2Label)
+                    .addComponent(al1Label)
+                    .addComponent(nameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(stateField)
+                    .addComponent(nameField)
+                    .addComponent(al1Field)
+                    .addComponent(al2Field)
+                    .addComponent(cityField)
+                    .addComponent(zipField, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(147, 147, 147))
+            .addComponent(mainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(zipCodeLabel)
-                            .addComponent(stateLabel)
-                            .addComponent(cityLabel)
-                            .addComponent(al2Label)
-                            .addComponent(al1Label)
-                            .addComponent(nameLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stateField)
-                            .addComponent(nameField)
-                            .addComponent(al1Field)
-                            .addComponent(al2Field)
-                            .addComponent(cityField)
-                            .addComponent(zipField, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(ViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addComponent(mainLabel)
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ViewButton)
+                    .addComponent(DeleteButton))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLabel)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,7 +208,7 @@ public class ViewLocalAddress extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(zipCodeLabel))
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,27 +232,72 @@ public class ViewLocalAddress extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_stateFieldActionPerformed
 
+    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
+        // TODO add your handling code here:
+        int selected = vhaTable.getSelectedRow();
+        if(selected == -1){
+            JOptionPane.showMessageDialog(this, "Please select a row to view.");
+        } else{
+            Address address = addressHistory.getAddress(selected);
+            nameField.setText(address.getName());
+            al1Field.setText(address.getAddressLine1());
+            al2Field.setText(address.getAddressLine2());
+            stateField.setText(address.getState());
+            zipField.setText(address.getZipCode());
+            cityField.setText(address.getCity());
+        }
+    }//GEN-LAST:event_ViewButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int selected = vhaTable.getSelectedRow();
+        if(selected == -1){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        } else{
+            addressHistory.deleteAddress(selected);
+            populate();
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
     private void populate(){
-        nameField.setText(address.getName());
-        al1Field.setText(address.getAddressLine1());
-        al2Field.setText(address.getAddressLine2());
-        stateField.setText(address.getState());
-        zipField.setText(address.getZipCode());
-        cityField.setText(address.getCity());
+        
+        DefaultTableModel dtm = (DefaultTableModel) vhaTable.getModel();
+        dtm.setRowCount(0);
+        for(Address address: addressHistory.getAddressList()){
+            Object [] obj = new Object[6];
+            obj[0] = address.getName();
+            obj[1] = address.getAddressLine1();
+            obj[2] = address.getAddressLine2();
+            obj[3] = address.getCity();
+            obj[4] = address.getState();
+            obj[5] = address.getZipCode();
+            dtm.addRow(obj);
+        }
+      //Reset Fields
+           al1Field.setText("");
+           al2Field.setText("");
+           zipField.setText("");
+           cityField.setText("");
+           stateField.setText("");
+           nameField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton ViewButton;
     private javax.swing.JTextField al1Field;
     private javax.swing.JLabel al1Label;
     private javax.swing.JTextField al2Field;
     private javax.swing.JLabel al2Label;
     private javax.swing.JTextField cityField;
     private javax.swing.JLabel cityLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mainLabel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField stateField;
     private javax.swing.JLabel stateLabel;
+    private javax.swing.JTable vhaTable;
     private javax.swing.JLabel zipCodeLabel;
     private javax.swing.JTextField zipField;
     // End of variables declaration//GEN-END:variables

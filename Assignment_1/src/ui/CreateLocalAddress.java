@@ -6,6 +6,7 @@ package ui;
 
 import javax.swing.JOptionPane;
 import model.Address;
+import model.AddressHistory;
 
 /**
  *
@@ -16,10 +17,10 @@ public class CreateLocalAddress extends javax.swing.JPanel {
     /**
      * Creates new form createLocalAddress
      */
-    private final Address address;
-    public CreateLocalAddress(Address address) {
+    private final AddressHistory addressHistory;
+    public CreateLocalAddress(AddressHistory addressHistory) {
         initComponents();
-        this.address = address;
+        this.addressHistory = addressHistory;
     }
 
     /**
@@ -186,12 +187,14 @@ public class CreateLocalAddress extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please fill all fields");
         } else {
            JOptionPane.showMessageDialog(this, "Local Address Saved");
+           Address address = new Address();
            address.setAddressLine1(al1Field.getText());
            address.setAddressLine2(al2Field.getText());
            address.setName(nameField.getText());
            address.setState(stateField.getText());
            address.setCity(cityField.getText());
            address.setZipCode(zipField.getText());
+           addressHistory.addAddress(address);
            
            //Reset Fields
            al1Field.setText("");
