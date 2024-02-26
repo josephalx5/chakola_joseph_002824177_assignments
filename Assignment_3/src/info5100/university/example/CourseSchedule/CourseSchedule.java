@@ -63,6 +63,8 @@ public class CourseSchedule {
 
     public void printCourseSchedule() {
         System.out.println("Semester: " + semester);
+        System.out.println("--------------------------------------------------------");
+        System.out.println("---------Course Schedule--------------");
         for (CourseOffer courseOffer : schedule) {
             Course subjectCourse = courseOffer.getSubjectCourse();
             System.out.println("Course ID: " + subjectCourse.getCourseNumber()+"| Name: "+subjectCourse.getName()+"| credits: "+subjectCourse.getCredits()+"| Number of Seats: "+courseOffer.getNumOfSeats()+"|No of Students Enrolled: "+(courseOffer.getNumOfSeats()-courseOffer.getEmptySeats())+"| Empty Seats: "+courseOffer.getEmptySeats()+"| ID: "+courseOffer.getFacultyProfile().getFacultyId().getPersonId());

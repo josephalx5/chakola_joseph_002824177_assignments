@@ -8,7 +8,9 @@ import info5100.university.example.Persona.StudentDirectory;
 
 public class UniversityMain {
     public static void main(String[] args) {
-
+        System.out.println("Welcome to Northeastern University");
+        System.out.println(Art.husky);
+        System.out.println(Art.art);
         College college_of_engineering = new College("College of Engineering");
         Department computerScience = new Department("Computer Science");
 
