@@ -4,6 +4,7 @@ import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
 import info5100.university.example.Persona.PersonDirectory;
+import info5100.university.example.Persona.RoleManager;
 import info5100.university.example.Persona.StudentDirectory;
 
 public class UniversityMain {
@@ -20,16 +21,15 @@ public class UniversityMain {
 
         // Create 10 Faculty members
         for (int i = 0; i < 10; i++) {
-            facultyDirectory.newFacultyProfile(personDirectory.newPerson("Faculty" + i));
+            facultyDirectory.newFacultyProfile(personDirectory.newPerson("Faculty" + i, RoleManager.FACULTY));
         }
 
         // Create 30 Students
         for (int i = 1; i <= 30; i++) {
-            studentDirectory.newStudentProfile(personDirectory.newPerson("Student" + i));
+            studentDirectory.newStudentProfile(personDirectory.newPerson("Student" + i,RoleManager.STUDENT));
         }
 
         // Add 7 courses to the course catalog
-        computerScience.newCourse("Intro to Computer Science","CS101" , 4);
         computerScience.newCourse("Data Structures", "CS102", 4);
         computerScience.newCourse("Algorithms", "CS103", 4);
         computerScience.newCourse("Database Systems", "CS104", 4);

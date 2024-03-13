@@ -38,5 +38,14 @@ public class PersonDirectory {
         }
             return null; //not found after going through the whole list
          }
+    public void removePerson(String id){
+         for (Person p : personlist) {
+
+            if (p.isMatch(id)) {
+               personlist.remove(p);
+               return;
+            }
+        }
+    }
     
 }
