@@ -5,6 +5,7 @@
 package ui;
 
 import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Person;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import info5100.university.example.Persona.RoleManager;
@@ -21,6 +22,7 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     JSplitPane splitpane;
     Department computerScience;
+
     public LoginPanel(JSplitPane splitpane, Department department) {
         initComponents();
         this.splitpane = splitpane;
@@ -97,7 +99,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         RoleManager desiredRole = null;
-        if(username.getText().isBlank()||password.getPassword().length==0){
+        if (username.getText().isBlank() || password.getPassword().length == 0) {
             JOptionPane.showMessageDialog(this, "Please provide the credentials");
             return;
         }
@@ -107,12 +109,24 @@ public class LoginPanel extends javax.swing.JPanel {
                 break;
             }
         }
-        if (null == desiredRole || 
-                computerScience.getPersonDirectory().findPerson(username.getText())==null) {
+        Person p = computerScience.getPersonDirectory().findPerson(username.getText());
+        if (null == desiredRole|| 
+                p == null || 
+                desiredRole != p.getRole()) {
             JOptionPane.showMessageDialog(this, "No Roles found");
         } else {
-            AdminPanel ad = new AdminPanel(splitpane,computerScience );
-            splitpane.setRightComponent(ad);
+            if(desiredRole==RoleManager.ADMIN){
+                AdminPanel ad = new AdminPanel(splitpane, computerScience);
+                splitpane.setRightComponent(ad);
+            }
+            if(desiredRole==RoleManager.FACULTY){
+                 FacultyPanel ad = new FacultyPanel(splitpane, computerScience,p);
+                splitpane.setRightComponent(ad);
+            }
+            if(desiredRole==RoleManager.STUDENT){
+                StudentPanel sp = new StudentPanel(splitpane, computerScience,p);
+                splitpane.setRightComponent(sp);
+            }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

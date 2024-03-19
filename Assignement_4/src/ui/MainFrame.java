@@ -160,6 +160,7 @@ public class MainFrame extends javax.swing.JFrame {
         computerScience = new Department("Computer Science");
         computerScience.getPersonDirectory().newPerson("admin1234", RoleManager.ADMIN);
         college_of_engineering.newDepartment( computerScience);
+        computerScience.newCourseSchedule("Fall 2024");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

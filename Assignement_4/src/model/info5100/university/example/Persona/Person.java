@@ -35,6 +35,11 @@ public class Person {
         return id;
     }
 
+    public RoleManager getRole() {
+        return role;
+    }
+    
+
         public boolean isMatch(String id){
             return getPersonId().equals(id);
         }

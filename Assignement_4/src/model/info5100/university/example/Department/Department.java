@@ -99,6 +99,10 @@ public class Department {
 
     }
 
+    public Degree getDegree() {
+        return degree;
+    }
+
     public void RegisterForAClass(String studentid, String cn, String semester) {
 
         StudentProfile sp = studentdirectory.findStudent(studentid);

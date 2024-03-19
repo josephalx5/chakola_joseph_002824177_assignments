@@ -32,6 +32,17 @@ public class SeatAssignment {
         return seat.getCourseCredits();
        
     }
+
+    public CourseLoad getCourseload() {
+        return courseload;
+    }
+
+    public float getGrade() {
+        return grade;
+    }
+    
+    
+    
     public Seat getSeat(){
         return seat;
     }

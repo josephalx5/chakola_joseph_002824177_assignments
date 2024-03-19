@@ -90,6 +90,17 @@ public class Transcript {
         return temp2;
 
     }
+    public void removeCourse(String courseId){
+        SeatAssignment sa1 = null;
+        for(CourseLoad cl : courseloadlist.values()){
+            for(SeatAssignment sa: cl.getSeatAssignments()){
+                if(sa.getAssociatedCourse().getCourseNumber().equals(courseId)){
+                    cl.getSeatAssignments().remove(sa);
+                    return;
+                }
+            }
+        }
+    }
 
     public void printTranscript(){
         System.out.println("Transcript for student: "+student.person.getPersonId());

@@ -12,14 +12,9 @@ package info5100.university.example.Persona;
 public class Person {
     
     String id;
-    RoleManager role;
     public Person (String id){
         
         this.id = id;
-    }
-    public Person(String id, RoleManager role){
-        this.id = id;
-        this.role = role;
     }
     public String getPersonId(){
         return id;

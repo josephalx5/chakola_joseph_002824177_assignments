@@ -38,5 +38,8 @@ public class CourseCatalog {
         }
         return null;
     }
+    public Course deleteCourseFromCatalog(int n){
+        return courselist.remove(n);
+    }
 
 }

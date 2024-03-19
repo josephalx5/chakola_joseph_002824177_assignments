@@ -91,6 +91,14 @@ public class Degree {
         return electivecount;
 
     }
+    public boolean courseType(String courseId){
+        for(Course c:corelist){
+            if(c.getCourseNumber().equals(courseId)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean isElectiveSatisfied(SeatAssignment sa) {
         for (Course c : electives) {

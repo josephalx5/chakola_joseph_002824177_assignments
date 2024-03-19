@@ -60,6 +60,20 @@ public class CourseSchedule {
         }
         return sum;
     }
+    public CourseOffer deleteCourseOffer(int n){
+        return schedule.remove(n);
+    }
+    
+    public void removeFacultyAssignment(String id){
+        for(CourseOffer co: schedule){
+            if(co.getFacultyProfile()!= null && co.getFacultyProfile().getFacultyId().getPersonId().equals(id)){
+                co.removeFacultyAssignment();
+            }
+        }
+    }
+    public ArrayList<CourseOffer> getSchedule(){
+        return schedule;
+    }
 
     public void printCourseSchedule() {
         System.out.println("Semester: " + semester);

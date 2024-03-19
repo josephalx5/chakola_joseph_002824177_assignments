@@ -21,15 +21,16 @@ public class UniversityMain {
 
         // Create 10 Faculty members
         for (int i = 0; i < 10; i++) {
-            facultyDirectory.newFacultyProfile(personDirectory.newPerson("Faculty" + i, RoleManager.FACULTY));
+            facultyDirectory.newFacultyProfile(personDirectory.newPerson("Faculty" + i));
         }
 
         // Create 30 Students
         for (int i = 1; i <= 30; i++) {
-            studentDirectory.newStudentProfile(personDirectory.newPerson("Student" + i,RoleManager.STUDENT));
+            studentDirectory.newStudentProfile(personDirectory.newPerson("Student" + i));
         }
 
         // Add 7 courses to the course catalog
+        computerScience.newCourse("Introduction to Computer Science", "CS101", 4);
         computerScience.newCourse("Data Structures", "CS102", 4);
         computerScience.newCourse("Algorithms", "CS103", 4);
         computerScience.newCourse("Database Systems", "CS104", 4);

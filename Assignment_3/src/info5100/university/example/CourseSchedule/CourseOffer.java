@@ -26,7 +26,6 @@ public class CourseOffer {
     }
      
     public void AssignAsTeacher(FacultyProfile fp) {
-
         facultyassignment = new FacultyAssignment(fp, this);
     }
 
@@ -51,7 +50,6 @@ public class CourseOffer {
     public Seat getEmptySeat() {
 
         for (Seat s : seatlist) {
-
             if (!s.isOccupied()) {
                 return s;
             }
@@ -83,6 +81,7 @@ public class CourseOffer {
         }
         return sum;
     }
+
     public int getEmptySeats(){
         int count = 0;
         for (Seat s: seatlist){

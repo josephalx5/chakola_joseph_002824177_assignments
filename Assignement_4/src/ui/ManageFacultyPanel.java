@@ -4,6 +4,7 @@
  */
 package ui;
 
+import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.Person;
@@ -24,11 +25,12 @@ public class ManageFacultyPanel extends javax.swing.JPanel {
      */
     JSplitPane splitpane;
     Department computerScience;
-
+    CourseSchedule schedule;
     public ManageFacultyPanel(JSplitPane splitpane, Department department) {
         initComponents();
         this.splitpane = splitpane;
         this.computerScience = department;
+        schedule = computerScience.getCourseSchedule("Fall 2024");
         populate();
     }
 
@@ -179,6 +181,7 @@ public class ManageFacultyPanel extends javax.swing.JPanel {
         } else {
             FacultyProfile sp = computerScience.getFacultydirectory().removeFaculty(facultyManagementTable.getSelectedRow());
             computerScience.getPersonDirectory().removePerson(sp.getFacultyId().getPersonId());
+            schedule.removeFacultyAssignment(sp.getFacultyId().getPersonId());
             populate();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

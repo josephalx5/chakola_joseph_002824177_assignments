@@ -4,6 +4,7 @@
  */
 package ui;
 
+import info5100.university.example.CourseSchedule.SeatAssignment;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.RoleManager;
@@ -167,7 +168,8 @@ public class ManageStudentsPanel extends javax.swing.JPanel {
         }else {
             Person p = computerScience.getPersonDirectory().newPerson(idField.getText(), RoleManager.STUDENT);
             p.setName(nameField.getText());
-            computerScience.getStudentDirectory().newStudentProfile(p);
+            StudentProfile sp = computerScience.getStudentDirectory().newStudentProfile(p);
+            sp.newCourseLoad("Fall 2024");
             populate();
             idField.setText("");
             nameField.setText("");
@@ -181,6 +183,9 @@ public class ManageStudentsPanel extends javax.swing.JPanel {
         } else {
             StudentProfile sp = computerScience.getStudentDirectory().removeStudent(studentTable.getSelectedRow());
             computerScience.getPersonDirectory().removePerson(sp.getPerson().getPersonId());
+            for(SeatAssignment s: sp.getCourseList()){
+                s.getCourseOffer().reassignSeat();
+            }
             populate();
         }
 

@@ -8,6 +8,7 @@ package info5100.university.example.CourseSchedule;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.Persona.Faculty.FacultyAssignment;
 import info5100.university.example.Persona.Faculty.FacultyProfile;
+import info5100.university.example.Persona.StudentProfile;
 import java.util.ArrayList;
 
 /**
@@ -31,11 +32,26 @@ public class CourseOffer {
     }
 
     public FacultyProfile getFacultyProfile() {
+        if(facultyassignment==null){
+            return null;
+        }
         return facultyassignment.getFacultyProfile();
+    }
+    public void removeFacultyAssignment(){
+        facultyassignment = null;
     }
 
     public String getCourseNumber() {
         return course.getCourseNumber();
+    }
+    public void removeStudent(StudentProfile sp){
+        for(Seat s:seatlist){
+            if(sp.getCurrentCourseLoad().equals(s.getSeatassignment().getCourseload()))
+            {
+                s.occupied = false;
+                break;
+            }
+        }
     }
 
     public void generatSeats(int n) {
@@ -82,6 +98,14 @@ public class CourseOffer {
 
         }
         return sum;
+    }
+    public void reassignSeat(){
+        for(Seat s:seatlist){
+            if(s.isOccupied()){
+                s.occupied=false;
+                return;
+            }
+        }
     }
     public int getEmptySeats(){
         int count = 0;
